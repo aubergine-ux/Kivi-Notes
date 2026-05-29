@@ -88,6 +88,7 @@ header {
 }
 
 .note-card {
+  cursor: grab;
   background: var(--surface-color);
   border-radius: 0.75rem;
   padding: 1.5rem;
@@ -101,6 +102,17 @@ header {
 .note-card:hover {
   transform: scale(1.02);
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+}
+
+.note-card:dragging {
+  opacity: 0.8;
+  cursor: grabbing;
+  transform: scale(1.05);
+  box-shadow: var(--secondary-text-color);
+}
+
+.note-card.drag-over {
+  border: 2px dashed var(--brand-color);
 }
 
 .note-title {
