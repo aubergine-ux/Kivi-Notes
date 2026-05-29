@@ -11,4 +11,4 @@ A Simple note-taking app written in HTML, CSS, & Javascript!
 - Green Theming
 
 ---
-Live Demo: https://aubergine-ux.github.io/Kivi-Notes
+## [Live Demo](http://kivi.aubergineux.com/)
