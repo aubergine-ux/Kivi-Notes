@@ -1,12 +1,14 @@
 # Kivi Notes
-A Project note-taking app written in Javascript.
+A Simple note-taking app written in HTML, CSS, & Javascript!
+
+---
 
 ## Features
 - Create, Delete, and Edit notes
+- Drag Notes to Reposition.
 - Local Note Storage
-- Dark and Light mode toggle
+- Dark & Light mode theme toggle
 - Green Theming
 
+---
 Live Demo: https://aubergine-ux.github.io/Kivi-Notes
-
-Based on this tutorial: https://www.youtube.com/watch?v=01YKQmia2Jw
