@@ -94,6 +94,8 @@ header {
   border: 1px solid var(--surface-color);
   transition: all 0.2s ease;
   position: relative;
+  max-height: 200px;
+  overflow: hidden;
 }
 
 .note-card:hover {
@@ -107,6 +109,8 @@ header {
   margin-bottom: 0.75rem;
   color: var(--text-color);
   word-wrap: break-word;
+  max-height: 50px;
+  overflow: hidden;
 }
 
 .note-content {
