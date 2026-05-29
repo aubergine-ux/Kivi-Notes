@@ -1,5 +1,6 @@
 let notes = []
 let editingNoteId = null
+let draggedNoteId = null
 
 
 function loadNotes() {
@@ -51,6 +52,53 @@ function deleteNote(noteId) {
     renderNotes()
 }
 
+function handleDragStart(event, noteId) {
+    draggedNoteID = noteId
+    event.dataTransfer.effectAllowed = 'move'
+    event.currentTarget.classList.add('dragging')
+}
+
+function handleDragOver(event, noteId) {
+    event.preventDefault()
+    event.dataTransfer.dropEffect = 'move'
+
+    if (noteId !== draggedNoteId) {
+        event.currentTarget.classList.add('drag-over')
+    }
+}
+
+function handleDragLeave(event) {
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+        event.currentTarget.classList.remove('drag-over')
+    }
+}
+
+function handleDrop(event, targetNoteId) {
+    event.preventDefault()
+    event.currentTarget.classList.remove('drag-over')
+
+    if (draggedNoteId === targetNoteId) {
+        draggedNoteID = null
+        return
+    }
+
+    const draggedIndex = notes.findIndex(note => note.id === draggedNoteId)
+    const targetIndex = notes.findIndex(note => note.id === targetNoteId)
+
+    const draggedNote = notes[draggedIndex]
+    notes.splice(draggedIndex, 1)
+    notes.splice(targetIndex,0, draggedNote)
+
+    draggedNoteID = null
+    saveNotes()
+    renderNotes()
+}
+
+function handleDragEnd(event) {
+    event.currentTarget.classList.remove('dragging')
+    draggedNoteID = null
+}
+
 function renderNotes() {
     const notesContainer = document.getElementById('notesContainer');
 
@@ -66,7 +114,13 @@ function renderNotes() {
     }
 
     notesContainer.innerHTML = notes.map(note => `
-        <div class="note-card">
+        <div class="note-card"
+            draggable="true"
+            ondragstart="handleDragStart(event,'${note.id}')"
+            ondragover="handleDragOver(event,'${note.id}')"
+            ondragleave="handleDragLeave(event)"
+            ondrop="handleDrop(event,'${note.id}')"
+            ondragend="handleDragEnd(event)">
             <h3 class="note-title">${note.title}</h3>
             <p class="note-content">${note.content}</p>
             <div class="note-actions">
